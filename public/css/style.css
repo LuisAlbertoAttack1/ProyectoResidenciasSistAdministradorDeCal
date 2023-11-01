@@ -1,0 +1,35 @@
+@font-face {
+    font-family: 'Monserrat';
+    src: url('../fonts/montserrat/Montserrat-Regular.otf');
+}
+
+.ColorDeFooter{
+    background-color: #e9ecef;
+}
+
+.colorTransparente {
+    background: rgba(138, 221, 45, 0);
+}
+.colorBotonLoginIngresar{
+    background-color: #dee2e6;
+}
+.tamDeImgLogoAgregarUsuario{
+    height: 25rem;
+    width: 25rem;
+}
+.imgTamañoDeMenuAdministrador{
+    height: 15rem;
+    width: 15rem;
+
+}
+.ImgTamañoValores{
+    width: 25rem;
+}
+.tamDeImgLogoEditarListado{
+    height: 20rem;
+    width: 20rem;
+}
+.tamDeImgLogoViewsSubirf1Docentes{
+    height: 13rem;
+    width: 13rem;
+}
