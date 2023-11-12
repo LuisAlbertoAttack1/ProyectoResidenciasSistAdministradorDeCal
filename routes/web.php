@@ -7,5 +7,6 @@ Route::get('/',[Inicio::class, 'index']);
 Route::get('/login',[Inicio::class, 'login']);
 
 //RUTAS DE LOGIN
+// Route::get('/'[])
 // Route::get('/',[AuthController::class, 'login'])->name('auth-login');
 // Route::post('/logear',[AuthController::class, 'logear'])->name('logear');
