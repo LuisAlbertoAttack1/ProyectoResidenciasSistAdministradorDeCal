@@ -11,18 +11,14 @@
     <script src="{{ asset('js/DataTable/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     @include('sweetalert::alert')
-
-    {{-- {{ asset('img/logocbt3.png') }} --}}
     <title>{{ $titulo }}</title>
 </head>
 
 <body>
-@include('shared/Navbar')
-<div class="min-vh-100 d-flex flex-column justify-content-between">
-
-</div>
-@include('shared/Footer')
-
+    @include('shared/Navbar')
+    <div class="min-vh-100 d-flex flex-column justify-content-between">
+        @yield('contenido')
+    </div>
+    @include('shared/Footer')
 </body>
-
 </html>
