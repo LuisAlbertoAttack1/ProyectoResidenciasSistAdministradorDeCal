@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Persona;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class SesionController extends Controller
 {
@@ -17,11 +18,11 @@ class SesionController extends Controller
             'password' => ['required','string'],
         ]);            
         
-        $consultaUsuario = User::where('usuario', request()->usuario)->first();
-
-        if($consultaUsuario){
-            if(Hash::check(request()->password, $consultaUsuario->password)){
-                Auth::login($consultaUsuario);
+        $user = User::where('usuario', request()->usuario)->first();
+        $persona = Persona::where('id_persona',$user->fk_persona)->first();
+        if($user){
+            if(Hash::check(request()->password, $user->password)){
+                Auth::login($user);
                 request()->session()->regenerate();
                 User::where('usuario', request()->usuario)->update(array('estado'=>'1'));
                 return redirect('/');
@@ -35,6 +36,13 @@ class SesionController extends Controller
                 'usuario' => 'Usuario o Contraseña no validos!'
             ]);            
         }
+    }
 
+    public function logout(){
+        User::where('usuario',  Auth::user()->usuario)->update(array('estado'=>'2'));
+        Auth::logout();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+        return redirect()->route('login');
     }
 }

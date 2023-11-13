@@ -1,7 +1,7 @@
 @extends('plantilla')
 @section('contenido')
 <div class="container mt-5">
-    <form method="POST" class="row justify-content-center" action="{{route('inicioSesion.login')}}">
+    <form method="POST" class="row justify-content-center" action="{{route('inicio.sesion')}}">
         @csrf 
         <div class="col-md-4">
             <div class="card">
@@ -15,13 +15,12 @@
                                     <i class="fas fa-exclamation-circle mr-1 text-warning"></i> {{$message}}
                                 </div>
                             @enderror
-                            <p>{{$dt}}</p>
                             <div class="form-floating mb-3 ">
-                                <input type="text" class="form-control" id="usuario" name="usuario" placeholder="usuario">
+                                <input type="text" class="form-control form-control-sm" id="usuario" name="usuario" placeholder="usuario">
                                 <label for="usuario" class="form-label"><i class="fa-solid fa-user me-2"></i>Usuario</label>
                             </div>
                             <div class="form-floating mb-3 ">
-                                <input type="password" class="form-control" id="password" name="password" placeholder="password">
+                                <input type="password" class="form-control form-control-sm" id="password" name="password" placeholder="password">
                                 <label for="password" class="form-label"><i class="fa-solid fa-lock me-2"></i>Contraseña</label>
                             </div>
                             <button type="submit" class="btn btn-success w-100 mb-4">Ingresar</button>                                              
