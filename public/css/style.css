@@ -1,3 +1,11 @@
+:root {
+
+
+    --ColorDeFooter:#e9ecef:
+
+}
+
+
 @font-face {
     font-family: 'Monserrat';
     src: url('../fonts/montserrat/Montserrat-Regular.otf');
@@ -44,4 +52,8 @@ font-size: 13px;
 }
 .TamDeLetras{
     font-size: 14px;
+}
+a{
+    text-decoration: none;
+    
 }
