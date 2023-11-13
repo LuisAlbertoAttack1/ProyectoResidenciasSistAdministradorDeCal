@@ -37,4 +37,5 @@ class InicioController extends Controller
         $infoUsuario['puesto'] = $rol->rol;
         return view('layouts/main', compact('titulo','infoUsuario'));
     }
+    
 }

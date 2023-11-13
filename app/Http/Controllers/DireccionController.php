@@ -22,4 +22,14 @@ class DireccionController extends Controller
         $consulta = Usuario::select('id_usuario','usuario','nombre','apellido_paterno','apellido_materno','t_cat_rol.rol')->join('t_persona','t_usuario.fk_persona','t_persona.id_persona')->join('t_cat_rol','t_usuario.fk_cat_rol','t_cat_rol.id_cat_rol')->get();
         return view('layouts/direccion/usuarios', compact('titulo','infoUsuario','consulta'));
     }
+    public function agregar_usuario(){
+        if(!Auth::user()){
+            return redirect('/login');
+        }
+        $titulo = 'Inicio';
+        $infoUsuario = Persona::where('id_persona',Auth::user()->fk_persona)->first();
+        $rol = Rol::where('id_cat_rol',Auth::user()->fk_cat_rol)->first();
+        $infoUsuario['puesto'] = $rol->rol;
+        return view('layouts/direccion/addUser', compact('titulo','infoUsuario'));
+    }
 }
