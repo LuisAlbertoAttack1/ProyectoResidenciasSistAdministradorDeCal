@@ -7,6 +7,7 @@
             <hr>
         </div>
         <div class="col-md-10">
+            <a href="" class="btn btn-outline-primary btn-sm"><i class=""></i></a>
             <div class="table-responsive">
                 <table class="table table-md table-hover table-responsive-lg mt-3 text-center" id="contenido_tabla">
                     <thead>
