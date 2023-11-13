@@ -44,8 +44,8 @@
             </div>
             <div class="form-floating mb-3">
                 <div class="d-grid gap-2 col-12 mx-auto">
-                    <a href="{{route('usuarios')}}" class="btn btn-outline-danger mb-3"><i class="fa-solid fa-rotate-left me-2"></i>Regresar</a>
                     <a href="{{route('usuarios')}}" class="btn btn-outline-primary mb-3"><i class="fa-solid fa-user-check me-2"></i>Registrar Usuario</a>
+                    <a href="{{route('usuarios')}}" class="btn btn-outline-danger mb-3"><i class="fa-solid fa-rotate-left me-2"></i>Regresar</a>
                 </div>
             </div>
         </div>
