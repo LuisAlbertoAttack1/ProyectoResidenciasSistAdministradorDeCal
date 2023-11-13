@@ -1,58 +1,35 @@
 @extends('plantilla')
-
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                {{-- CONTENIDO --}}
-                <div
-                    class="card position-absolute top-50 start-50 translate-middle shadow-lg bg-body rounded rounded border-0 rounded-5">
-                    <div class="card-body">
-                        {{-- CONTENIDO CARD 2 VISTA --}}
-                        <div class="row">
-                            <div class="col-sm-6 mb-3 mb-sm-0">
-                                <div class="card border-0 colorTransparente">
-                                    <div class="card-body">
-                                        {{-- CONTENIDO DE IMG LOGO DE ESCUELA --}}
-                                        <img src="{{ asset('img/logocbt3.webp') }}" class="img-fluid"
-                                            alt="">
-                                        {{-- CONTENIDO DE IMG LOGO DE ESCUELA --}}
-                                    </div>
+@section('contenido')
+<div class="container mt-5">
+    <form method="POST" class="row justify-content-center" action="{{route('inicioSesion.login')}}">
+        @csrf 
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row justify-content-around">
+                        <div class="col-md-11">
+                            <h4 class="text-center mt-2 mb-3">Sistema De Administración De Calificaciones</h4>
+                            <img src="{{ asset('img/logocbt3.webp') }}" class="mx-auto d-block mb-3" alt="Logo" width="180px">
+                            @error('usuario')
+                                <div class="h5 text-center text-danger" >
+                                    <i class="fas fa-exclamation-circle mr-1 text-warning"></i> {{$message}}
                                 </div>
+                            @enderror
+                            <p>{{$dt}}</p>
+                            <div class="form-floating mb-3 ">
+                                <input type="text" class="form-control" id="usuario" name="usuario" placeholder="usuario">
+                                <label for="usuario" class="form-label"><i class="fa-solid fa-user me-2"></i>Usuario</label>
                             </div>
-                            <div class="col-sm-6">
-                                <div class="card border-0 colorTransparente">
-                                    <div class="card-body">
-                                        {{-- FUNCIONALIDAD --}}
-                                        {{-- <form action="{{ route('logear') }}" method="post">
-                                            @csrf
-                                            @method('POST') --}}
-                                            <h3 class="text-center mt-2">Sistema De Administración <br> De Calificaiones</h1>
-                                                <h5 class="mt-2 mb-2">Usuario</h5>
-                                                <input name="user" type="text" class="form-control text-center"
-                                                    placeholder="Usuario" aria-label="Usuario"
-                                                    aria-describedby="basic-addon1" required>
-                                                <h5 class="mt-2 mb-2">Contraseña</h5>
-                                                <input name="password" type="password" minlength="8" maxlength="8"
-                                                    class="form-control text-center" placeholder="Contraseña"
-                                                    aria-label="Contraseña" aria-describedby="basic-addon1" required>
-                                                {{-- SECCION DE BOTON --}}
-                                                <div class="d-grid gap-2 col-6 mx-auto">
-                                                    <button class="btn colorBotonLoginIngresar mt-4">Ingresar</button>
-                                                </div>
-                                                {{-- SECCION DE BOTON --}}
-                                        {{-- </form> --}}
-                                        {{-- FUNCIONALIDAD --}}
-                                    </div>
-                                </div>
+                            <div class="form-floating mb-3 ">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="password">
+                                <label for="password" class="form-label"><i class="fa-solid fa-lock me-2"></i>Contraseña</label>
                             </div>
+                            <button type="submit" class="btn btn-success w-100 mb-4">Ingresar</button>                                              
                         </div>
-                        {{-- CONTENIDO CARD 2 VISTA --}}
-
                     </div>
                 </div>
-                
-                {{-- CONTENIDO --}}
-            </div>
+            </div>            
         </div>
-    </div>
-
+    </form>
+</div>
+@endsection('contenido')

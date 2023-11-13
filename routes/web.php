@@ -1,12 +1,11 @@
 <?php
 
-use App\Http\Controllers\Inicio;
+use App\Http\Controllers\InicioController;
+use App\Http\Controllers\SesionController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/',[Inicio::class, 'index']);
-Route::get('/login',[Inicio::class, 'login']);
+Route::get('/', [InicioController::class, 'index'])->name('home');
+Route::get('/login', [InicioController::class, 'login'])->name('login');
 
-//RUTAS DE LOGIN
-// Route::get('/'[])
-// Route::get('/',[AuthController::class, 'login'])->name('auth-login');
-// Route::post('/logear',[AuthController::class, 'logear'])->name('logear');
+Route::post('/login',[SesionController::class, 'login'])->name('inicioSesion.login');
+
