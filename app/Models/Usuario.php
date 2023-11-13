@@ -11,5 +11,7 @@ class Usuario extends Model
 {
     use HasFactory, HasApiTokens, Notifiable;
     protected $table = 't_usuario';
+    protected $primaryKey = 'id_usuario';
     public $timestamps = false;
+
 }
