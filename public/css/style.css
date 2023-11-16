@@ -55,5 +55,16 @@ font-size: 13px;
 }
 a{
     text-decoration: none;
-    
+    transition-duration: 1s;
+}
+a:hover{
+    transform: scale(1.1);
+    transition-duration: 1s;
+}
+.TamDeFotoEventoCbt{
+    width: 35rem;
+}
+.GosorDeLetra{
+    font-size: 40px;
+ 
 }

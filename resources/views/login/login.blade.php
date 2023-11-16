@@ -4,12 +4,12 @@
     <form method="POST" class="row justify-content-center" action="{{route('inicio.sesion')}}">
         @csrf 
         <div class="col-md-4">
-            <div class="card">
+            <div class="card shadow-lg p-3 mb-5 bg-body-tertiary rounded rounded-4 border-0">
                 <div class="card-body">
                     <div class="row justify-content-around">
                         <div class="col-md-11">
-                            <h4 class="text-center mt-2 mb-3">Sistema De Administración De Calificaciones</h4>
                             <img src="{{ asset('img/logocbt3.webp') }}" class="mx-auto d-block mb-3" alt="Logo" width="180px">
+                            <h5 class="text-center mt-2 mb-3">Sistema De Administración De Calificaciones</h5>
                             @error('usuario')
                                 <div class="h5 text-center text-danger" >
                                     <i class="fas fa-exclamation-circle mr-1 text-warning"></i> {{$message}}
