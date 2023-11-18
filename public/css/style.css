@@ -1,14 +1,23 @@
 :root {
-
-
     --ColorDeIconos:#e9ecef:
-
 }
 
 
 @font-face {
     font-family: 'Monserrat';
     src: url('../fonts/montserrat/Montserrat-Regular.otf');
+}
+
+.text-verde{
+    color: #0f5f3a;
+}
+
+.menu-fixed{ 
+	position: fixed;
+  	width: 100%;
+  	top:0;
+  	z-index: 1000;
+  	box-shadow: 0px 4px 3px rgba(0,0,0,0.2);
 }
 
 .ColorDeFooter{
@@ -44,8 +53,8 @@
 
 /* Nuevas clases */
 .TamDeImgDeFooter{
-    width: 8rem;
-    height: 8rem;
+    width: 7rem;
+    height: 7rem;
 }
 .TamDeLetra{
 font-size: 13px;
@@ -55,12 +64,22 @@ font-size: 13px;
 }
 a{
     text-decoration: none;
-    transition-duration: 1s;
 }
-a:hover{
+
+.card-panel{
+    color: #198754;
+    transition-duration: 1s;
+    border-radius: 1rem;
+    border: none;
+}
+
+.card-panel:hover{
     transform: scale(1.1);
     transition-duration: 1s;
+    color: #0f5f3a;
+    border: 1px solid #0f5f3a;
 }
+
 .TamDeFotoEventoCbt{
     width: 35rem;
 }

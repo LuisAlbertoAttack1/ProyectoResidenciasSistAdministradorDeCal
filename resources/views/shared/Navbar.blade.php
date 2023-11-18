@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-light border-bottom border-success border-3" id="navbar">
     <div class="container text-center">
       <a class="navbar-brand text-success" href="/"><img class="me-2" src="{{ asset('img/logocbt3.webp') }}" alt="Logo" width="25px"> <b>CBT 3 Sr Max Shein Heister</b></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">

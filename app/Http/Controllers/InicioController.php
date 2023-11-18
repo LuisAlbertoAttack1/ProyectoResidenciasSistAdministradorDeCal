@@ -28,10 +28,13 @@ class InicioController extends Controller
         return view('login/login', compact('titulo'));
     }
     public function panel(){
+        if(!Auth::user()){
+            return redirect('/login');
+        }
         if(Auth::user()->fk_cat_rol != 1){
             return redirect('/');
         }
-        $titulo = 'Login';
+        $titulo = 'Panel de control';
         $infoUsuario = Persona::where('id_persona',Auth::user()->fk_persona)->first();
         $rol = Rol::where('id_cat_rol',Auth::user()->fk_cat_rol)->first();
         $infoUsuario['puesto'] = $rol->rol;
