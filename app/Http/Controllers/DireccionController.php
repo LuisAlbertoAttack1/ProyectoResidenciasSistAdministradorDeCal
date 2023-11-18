@@ -32,4 +32,35 @@ class DireccionController extends Controller
         $infoUsuario['puesto'] = $rol->rol;
         return view('layouts/direccion/addUser', compact('titulo','infoUsuario'));
     }
+    public function asignacion_materia(){
+        if(!Auth::user()){
+            return redirect('/login');
+        }
+        $titulo = 'Inicio';
+        $infoUsuario = Persona::where('id_persona',Auth::user()->fk_persona)->first();
+        $rol = Rol::where('id_cat_rol',Auth::user()->fk_cat_rol)->first();
+        $infoUsuario['puesto'] = $rol->rol;
+        return view('layouts/direccion/AsignacionMaterias', compact('titulo','infoUsuario'));
+    }
+    public function editar_asignacion_materias(){
+        if(!Auth::user()){
+            return redirect('/login');
+        }
+        $titulo = 'Inicio';
+        $infoUsuario = Persona::where('id_persona',Auth::user()->fk_persona)->first();
+        $rol = Rol::where('id_cat_rol',Auth::user()->fk_cat_rol)->first();
+        $infoUsuario['puesto'] = $rol->rol;
+        return view('layouts/direccion/EditarAsignacionMat', compact('titulo','infoUsuario'));
+    }
+    public function Aprobados_y_Reprobados(){
+        if(!Auth::user()){
+            return redirect('/login');
+        }
+        $titulo = 'Inicio';
+        $infoUsuario = Persona::where('id_persona',Auth::user()->fk_persona)->first();
+        $rol = Rol::where('id_cat_rol',Auth::user()->fk_cat_rol)->first();
+        $infoUsuario['puesto'] = $rol->rol;
+        return view('layouts/direccion/Aprobadosyreprobados', compact('titulo','infoUsuario'));
+    }
+
 }

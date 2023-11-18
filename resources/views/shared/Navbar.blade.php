@@ -12,7 +12,7 @@
             <a class="nav-link active" aria-current="page" href="/"><i class="fa-solid fa-house"></i></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{route('panel')}}"><i class="fa-solid fa-gears me-2"></i>Panel de control</a>
+            <a class="nav-link" href="{{route('panel')}}"><i class="fa-solid fa-gears me-2" style="color:#219711"></i>Panel de control</a>
           </li>
         </ul>
         <ul class="navbar-nav mx-auto">

@@ -1,7 +1,14 @@
+<<<<<<< HEAD
+:root{
+    --color-verde:#21482e ;
+    --color-verde-claro: #60905d;
+    --color-azul:#213f48;
+    --color-azul-claro: #5d7690;
+=======
 :root {
     --ColorDeIconos:#e9ecef:
+>>>>>>> 9bedf84855550af87d1521f93ded0757e409bb88
 }
-
 
 @font-face {
     font-family: 'Monserrat';
@@ -64,6 +71,12 @@ font-size: 13px;
 }
 a{
     text-decoration: none;
+<<<<<<< HEAD
+    transition-duration: 1s;
+
+
+=======
+>>>>>>> 9bedf84855550af87d1521f93ded0757e409bb88
 }
 
 .card-panel{
@@ -76,8 +89,12 @@ a{
 .card-panel:hover{
     transform: scale(1.1);
     transition-duration: 1s;
+<<<<<<< HEAD
+    
+=======
     color: #0f5f3a;
     border: 1px solid #0f5f3a;
+>>>>>>> 9bedf84855550af87d1521f93ded0757e409bb88
 }
 
 .TamDeFotoEventoCbt{
@@ -86,4 +103,18 @@ a{
 .GosorDeLetra{
     font-size: 40px;
  
+}
+
+.ColorDeCard1{
+
+background-color: --
+}
+.ColorDeCard2{
+    background-color: #dee2e6;
+}
+.ColorDeCard3{
+    background-color: #ced4da;
+}
+.ColorDeCard4{
+    background-color: #adb5bd;
 }
