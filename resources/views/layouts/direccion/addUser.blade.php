@@ -12,7 +12,7 @@
         <form action="" method="POST">
             @csrf
             <div class="row justify-content-around">
-                <div class="col-md-2 align-self-center">
+                <div class="d-none d-md-block col-md-2 align-self-center">
                     <img src="{{ asset('img/logocbt3.webp') }}" class="mx-auto d-block mb-3 img-fluid" alt="Logo">
                 </div>
                 <div class="col-md-4 align-self-center">

@@ -5,7 +5,7 @@
         <h1 class="display-6 mb-4"><b><i class="fa-solid fa-file-contract me-2 text-verde2"></i>Asignacion De Materias</b></h1>
         <hr class="text-verde">
         <div class="row justify-content-around">
-            <div class="col-md-2 align-self-center">
+            <div class="d-none d-md-block col-md-2 align-self-center">
                 <img src="{{ asset('img/logocbt3.webp') }}" class="mx-auto d-block img-fluid" alt="Logo">
             </div>
             <div class="col-md-8 align-self-center">
