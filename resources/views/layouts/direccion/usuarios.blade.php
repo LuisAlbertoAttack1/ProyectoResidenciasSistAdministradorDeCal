@@ -1,15 +1,15 @@
 @extends('plantilla')
 @section('contenido')
 <div class="container mt-4">
-    <div class="row justify-content-around">
-        <div class="col-12 text-center">
-            <h1 class="display-5">Listado de usuarios</h1>
-            <hr>
+    <div class="row justify-content-around mt-5">
+        <div class="col-12">
+            <h1 class="display-6"><b><i class="fa-solid fa-users-rectangle text-verde2 me-2"></i>Listado de usuarios</b></h1>
         </div>
-        <div class="col-md-10">
+        <div class="col-md-12">
             <div class="text-end">
-                <a href="{{route('agregar')}}" class="btn btn-outline-primary btn-sm mb-3"><i class="fa-solid fa-user-plus me-2"></i>Agregar Usuario</a>
+                <a href="{{route('agregar')}}" class="btn btn-outline-success btn-sm mb-3"><i class="fa-solid fa-user-plus me-2"></i>Agregar Usuario</a>
                 <a href="{{route('panel')}}" class="btn btn-outline-danger btn-sm mb-3"><i class="fa-solid fa-rotate-left me-2"></i>Regresar</a>
+                <hr class="text-verde mb-4">
             </div>
             <div class="table-responsive">
                 <table class="table table-md table-hover table-responsive-lg mt-3 text-center" id="contenido_tabla">
