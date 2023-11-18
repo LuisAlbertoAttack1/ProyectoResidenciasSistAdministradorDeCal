@@ -1,13 +1,30 @@
+<<<<<<< HEAD
 :root{
     --color-verde:#21482e ;
     --color-verde-claro: #60905d;
     --color-azul:#213f48;
     --color-azul-claro: #5d7690;
+=======
+:root {
+    --ColorDeIconos:#e9ecef:
+>>>>>>> 9bedf84855550af87d1521f93ded0757e409bb88
 }
 
 @font-face {
     font-family: 'Monserrat';
     src: url('../fonts/montserrat/Montserrat-Regular.otf');
+}
+
+.text-verde{
+    color: #0f5f3a;
+}
+
+.menu-fixed{ 
+	position: fixed;
+  	width: 100%;
+  	top:0;
+  	z-index: 1000;
+  	box-shadow: 0px 4px 3px rgba(0,0,0,0.2);
 }
 
 .ColorDeFooter{
@@ -43,8 +60,8 @@
 
 /* Nuevas clases */
 .TamDeImgDeFooter{
-    width: 8rem;
-    height: 8rem;
+    width: 7rem;
+    height: 7rem;
 }
 .TamDeLetra{
 font-size: 13px;
@@ -54,15 +71,32 @@ font-size: 13px;
 }
 a{
     text-decoration: none;
+<<<<<<< HEAD
     transition-duration: 1s;
 
 
+=======
+>>>>>>> 9bedf84855550af87d1521f93ded0757e409bb88
 }
-a:hover{
+
+.card-panel{
+    color: #198754;
+    transition-duration: 1s;
+    border-radius: 1rem;
+    border: none;
+}
+
+.card-panel:hover{
     transform: scale(1.1);
     transition-duration: 1s;
+<<<<<<< HEAD
     
+=======
+    color: #0f5f3a;
+    border: 1px solid #0f5f3a;
+>>>>>>> 9bedf84855550af87d1521f93ded0757e409bb88
 }
+
 .TamDeFotoEventoCbt{
     width: 35rem;
 }
