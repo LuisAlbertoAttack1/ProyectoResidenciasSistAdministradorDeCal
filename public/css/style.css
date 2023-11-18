@@ -1,10 +1,9 @@
-:root {
-
-
-    --ColorDeIconos:#e9ecef:
-
+:root{
+    --color-verde:#21482e ;
+    --color-verde-claro: #60905d;
+    --color-azul:#213f48;
+    --color-azul-claro: #5d7690;
 }
-
 
 @font-face {
     font-family: 'Monserrat';
@@ -56,10 +55,13 @@ font-size: 13px;
 a{
     text-decoration: none;
     transition-duration: 1s;
+
+
 }
 a:hover{
     transform: scale(1.1);
     transition-duration: 1s;
+    
 }
 .TamDeFotoEventoCbt{
     width: 35rem;
@@ -67,4 +69,18 @@ a:hover{
 .GosorDeLetra{
     font-size: 40px;
  
+}
+
+.ColorDeCard1{
+
+background-color: --
+}
+.ColorDeCard2{
+    background-color: #dee2e6;
+}
+.ColorDeCard3{
+    background-color: #ced4da;
+}
+.ColorDeCard4{
+    background-color: #adb5bd;
 }
