@@ -1,7 +1,7 @@
 @extends('plantilla')
 @section('contenido')
 <div class="container mt-5">
-    <form method="POST" class="row justify-content-center" action="{{route('inicio.sesion')}}">
+    <form method="POST" class="row justify-content-center mt-5" action="{{route('inicio.sesion')}}">
         @csrf 
         <div class="col-md-4">
             <div class="card shadow-lg p-3 mb-5 bg-body-tertiary rounded rounded-4 border-0">

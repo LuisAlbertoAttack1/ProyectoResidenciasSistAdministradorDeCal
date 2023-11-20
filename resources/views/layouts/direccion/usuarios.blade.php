@@ -7,8 +7,8 @@
         </div>
         <div class="col-md-12">
             <div class="text-end">
-                <a href="{{route('agregar')}}" class="btn btn-outline-success btn-sm mb-3"><i class="fa-solid fa-user-plus me-2"></i>Agregar Usuario</a>
                 <a href="{{route('panel')}}" class="btn btn-outline-danger btn-sm mb-3"><i class="fa-solid fa-rotate-left me-2"></i>Regresar</a>
+                <a href="{{route('agregar')}}" class="btn btn-outline-success btn-sm mb-3"><i class="fa-solid fa-user-plus me-2"></i>Agregar Usuario</a>
                 <hr class="text-verde mb-4">
             </div>
             <div class="table-responsive">
@@ -28,13 +28,13 @@
                     <tbody> 
                         @foreach($consulta as $usuario)
                             <tr>
-                                <td>{{$usuario['usuario']}}</td>
+                                <td class="text-start">{{$usuario['usuario']}}</td>
                                 <td>{{$usuario['nombre']}}</td>
                                 <td>{{$usuario['apellido_paterno']}}</td>
                                 <td>{{$usuario['apellido_materno']}}</td>
                                 <td>{{$usuario['rol']}}</td>
-                                <td><a href="{{$usuario['id_usuario']}}" class="btn btn-outline-success btn-sm"><i class="fa-solid fa-pen-to-square"></i></a></td>
-                                <td><a href="{{$usuario['id_usuario']}}" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-unlock-keyhole"></i></a></td>
+                                <td><a href="{{route('precarga.usuario',$usuario['id_usuario'])}}" class="btn btn-outline-success btn-sm"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                                <td><a href="{{route('password.usuario',$usuario['id_usuario'])}}" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-unlock-keyhole"></i></a></td>
                                 <td><a href="{{$usuario['id_usuario']}}" class="btn btn-outline-danger btn-sm"><i class="fa-solid fa-user-large-slash"></i></a></td>
                             </tr>
                         @endforeach                       

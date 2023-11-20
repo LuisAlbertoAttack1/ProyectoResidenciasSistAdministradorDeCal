@@ -7,9 +7,3 @@ $(window).on('scroll',function(){
         $('#navbar').removeClass('menu-fixed');
     }
 });
-
-/* $(document).ready(() => {
-    $('#frm_agregar_usuario').on('submit', (e) => {
-        e.preventDefault();
-    });
-}); */

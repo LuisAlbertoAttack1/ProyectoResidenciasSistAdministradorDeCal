@@ -9,17 +9,17 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class SesionController extends Controller
 {
     public function login(){
         $credenciales = request()->validate([
-            'usuario' => ['required','string'],
-            'password' => ['required','string'],
+            'usuario' => 'required',
+            'password' => 'required',
         ]);            
         
         $user = User::where('usuario', request()->usuario)->first();
-        $persona = Persona::where('id_persona',$user->fk_persona)->first();
         if($user){
             if(Hash::check(request()->password, $user->password)){
                 Auth::login($user);
@@ -29,7 +29,7 @@ class SesionController extends Controller
             }else{
                 throw ValidationException::withMessages([
                     'usuario' => 'Usuario o Contraseña no validos!'
-                ]);                
+                ]);    
             }
         }else{
             throw ValidationException::withMessages([
