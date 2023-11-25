@@ -19,6 +19,8 @@ Route::get('/listado', [DireccionController::class, 'Aprobados_y_Reprobados'])->
 Route::get('/lista_materias', [DireccionController::class, 'lista_materias'])->name('listado.materia');
 Route::get('/addUser', [DireccionController::class, 'agregar_usuario'])->name('agregar');
 Route::get('/addMateria', [DireccionController::class, 'agregar_materia'])->name('agregar.materia');
+Route::get('/listado_docentes', [DireccionController::class, 'listado_docente'])->name('lista.docente');
+
 Route::post('/crearMateria', [DireccionController::class, 'crear_materia'])->name('crear.materia');
 Route::get('/cargarMateria{materia}',[DireccionController::class, 'precargar_materia'])->name('precarga.materia');
 Route::put('/actualizar/{materia}',[DireccionController::class, 'actualizar_usuario'])->name('actualizar.materia');

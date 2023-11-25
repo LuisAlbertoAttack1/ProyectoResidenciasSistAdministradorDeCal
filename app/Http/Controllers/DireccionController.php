@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Carrera;
+use App\Models\Docente;
 use App\Models\Materias;
 use App\Models\Persona;
 use App\Models\Rol;
@@ -274,5 +275,15 @@ class DireccionController extends Controller{
         $materia->save();
         Alert::success('Proceso completado', 'Materia actualizada con exito!');
         return redirect()->route('listado.materia');
+    }
+
+    public function listado_docente(){
+        if($this->validar_sesion()){
+            return redirect('/');
+        }
+        $titulo = 'Listado de docentes';
+        $infoUsuario = $this->datos_sesion();
+        $consulta = Docente::join('t_persona','t_docente.fk_persona','t_persona.id_persona')->get();
+        return view('layouts/direccion/listaDocente', compact('titulo','infoUsuario','consulta'));  
     }
 }
