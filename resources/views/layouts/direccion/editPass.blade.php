@@ -22,7 +22,7 @@
             <div class="form-floating mb-3 ">
                 <input type="password" class="form-control form-control-sm" id="password_actual" name="password_actual"
                     placeholder="Contraseña">
-                <label for="password_actual" class="form-label"><i class="fa-solid fa-user-shield me-2 text-verde2"></i>Contraseña actual</label>
+                <label for="password_actual" class="form-label"><i class="fa-solid fa-user-shield me-2 text-verde2"></i>Contraseña</label>
             </div>
         </div>
         <div class="col-md-4 align-self-center">
@@ -49,4 +49,24 @@
         </div>
     </form>
 </div>
+@error('correcto')
+    <p class="text-danger"><i class="fas fa-exclamation-circle me-1 text-warning"></i> </p>
+    <script>
+        Swal.fire({
+        title: "Correcto",
+        text: "Contraseña de usuario actualizada con exito!",
+        icon: "success",
+        allowEscapeKey: false,
+        showCancelButton: false,
+        allowEnterKey: false,
+        allowOutsideClick: false,
+        confirmButtonColor: "#3085d6",
+        confirmButtonText: "Aceptar"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location="usuarios";
+            }
+        });
+    </script>
+@enderror
 @endsection('contenido')

@@ -10,7 +10,6 @@
     <script src="{{ mix('js/app.js') }}"></script>
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/DataTable/jquery.dataTables.js') }}"></script>
-    @include('sweetalert::alert')
     <title>{{ $titulo }}</title>
 </head>
 
@@ -22,32 +21,7 @@
         @yield('contenido')
     </div>
     @include('shared/Footer')
-    <script>
-        $(document).ready(() =>{
-            $('#contenido_tabla').DataTable({
-                language: {
-                    "decimal": "",
-                    "emptyTable": "No hay información",
-                    "info": "Mostrando _START_ a _END_ de _TOTAL_ Entradas",
-                    "infoEmpty": "Mostrando 0 to 0 of 0 Entradas",
-                    "infoFiltered": "(Filtrado de _MAX_ total entradas)",
-                    "infoPostFix": "",
-                    "thousands": ",",
-                    "lengthMenu": "Mostrar _MENU_ Entradas",
-                    "loadingRecords": "Cargando...",
-                    "processing": "Procesando...",
-                    "search": "Buscar:",
-                    "zeroRecords": "Sin resultados encontrados",
-                    "paginate": {
-                        "first": "Primero",
-                        "last": "Ultimo",
-                        "next": "Siguiente",
-                        "previous": "Anterior"
-                    }
-                }
-            });
-        });
-    </script>
+    @include('sweetalert::alert')
     <script src="{{ asset('js/main.js') }}"></script>
 </body>
 </html>

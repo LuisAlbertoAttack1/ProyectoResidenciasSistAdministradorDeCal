@@ -1,8 +1,8 @@
 @extends('plantilla')
 @section('contenido')
-<div class="container mt-4">
+<div class="container mt-1">
     <div class="row justify-content-center mt-5">
-        <div class="col-12 mt-4 mb-3">
+        <div class="col-12 mb-3">
             <h1 class="display-6"><b><i class="fa-solid fa-school-flag me-2 text-verde2"></i>Funciones Subdireccion</b></h1>
             <div class="row mt-4">
                 <hr class="text-success mb-5">
@@ -31,10 +31,18 @@
                     </a>
                 </div>
                 <div class="col-md-3">
+                    <a href="{{route('listado.materia')}}" class="card shadow card-panel mb-3">
+                        <div class="card-body text-center mt-3 mb-2">
+                            <i class="fa-solid fa-book fa-6x mb-3"></i>
+                            <h6>Materias</h6>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-3">
                     <a href="{{route('listado')}}" class="card shadow card-panel mb-3">
                         <div class="card-body text-center mt-3 mb-2">
                             <i class="fa-solid fa-list-check fa-6x mb-3"></i>
-                            <h6>Aprobados Y Reprobados</h6>
+                            <h6>Calificaciones</h6>
                         </div>
                     </a>
                 </div>

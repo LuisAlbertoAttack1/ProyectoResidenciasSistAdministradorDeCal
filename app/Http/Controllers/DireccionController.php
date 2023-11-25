@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Carrera;
+use App\Models\Materias;
 use App\Models\Persona;
 use App\Models\Rol;
 use App\Models\Usuario;
@@ -11,33 +13,41 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
 
-class DireccionController extends Controller
-{
-
+class DireccionController extends Controller{
+    //funcion para validar si existe una sesion y si existe corresponda al rol adecuado
+    private function validar_sesion(){
+        return !Auth::user() || Auth::user()->fk_cat_rol != 1;
+    }
+    //funcion para obtener los datos del usuario con sesion activa 
     private function datos_sesion(){
         $infoUsuario = Persona::where('id_persona',Auth::user()->fk_persona)->first();
         $rol = Rol::where('id_cat_rol',Auth::user()->fk_cat_rol)->first();
         $infoUsuario['puesto'] = $rol->rol;
         return $infoUsuario;        
     }
-
+    //funcion para obtener el listado de roles
     private function tipo_rol(){
         $consulta = Rol::all();
         return $consulta;
     }
 
+    private function lista_carreras(){
+        $consulta = Carrera::all();
+        return $consulta;
+    }
+
     public function usuarios(){
-        if(Auth::user()->fk_cat_rol != 1){
+        if($this->validar_sesion()){
             return redirect('/');
         }
         $titulo = 'Listado de usuarios';
         $infoUsuario = $this->datos_sesion();
-        $consulta = Usuario::select('id_usuario','usuario','nombre','apellido_paterno','apellido_materno','t_cat_rol.rol')->join('t_persona','t_usuario.fk_persona','t_persona.id_persona')->join('t_cat_rol','t_usuario.fk_cat_rol','t_cat_rol.id_cat_rol')->get();
+        $consulta = Usuario::select('id_usuario','usuario','nombre','apellido_paterno','apellido_materno','t_cat_rol.rol','estado')->join('t_persona','t_usuario.fk_persona','t_persona.id_persona')->join('t_cat_rol','t_usuario.fk_cat_rol','t_cat_rol.id_cat_rol')->get();
         return view('layouts/direccion/usuarios', compact('titulo','infoUsuario','consulta'));
     }
     public function agregar_usuario(){
-        if(!Auth::user()){
-            return redirect('/login');
+        if($this->validar_sesion()){
+            return redirect('/');
         }
         $titulo = 'Agregar usuario';
         $infoUsuario = $this->datos_sesion();
@@ -45,24 +55,24 @@ class DireccionController extends Controller
         return view('layouts/direccion/addUser', compact('titulo','infoUsuario','roles'));
     }
     public function asignacion_materia(){
-        if(!Auth::user()){
-            return redirect('/login');
+        if($this->validar_sesion()){
+            return redirect('/');
         }
         $titulo = 'Inicio';
         $infoUsuario = $this->datos_sesion();
         return view('layouts/direccion/AsignacionMaterias', compact('titulo','infoUsuario'));
     }
     public function editar_asignacion_materias(){
-        if(!Auth::user()){
-            return redirect('/login');
+        if($this->validar_sesion()){
+            return redirect('/');
         }
         $titulo = 'Inicio';
         $infoUsuario = $this->datos_sesion();
         return view('layouts/direccion/EditarAsignacionMat', compact('titulo','infoUsuario'));
     }
     public function Aprobados_y_Reprobados(){
-        if(!Auth::user()){
-            return redirect('/login');
+        if($this->validar_sesion()){
+            return redirect('/');
         }
         $titulo = 'Inicio';
         $infoUsuario = $this->datos_sesion();
@@ -78,7 +88,7 @@ class DireccionController extends Controller
             'nombre' => 'required',
             'apellido_paterno' => 'required',
             'apellido_materno' => 'required',
-            'password' => 'required|min:8|max:30',
+            'password' => 'required|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&*!])[A-Za-z\d@#$%^&*!]{8,}$/',
             'rol' => 'required',
         ]); 
 
@@ -97,18 +107,19 @@ class DireccionController extends Controller
             $usuario->fk_cat_rol =  request()->rol;
             $usuario->fk_persona =  $persona->id_persona;
             $usuario->save();
+            Alert::success('Proceso finalizado', 'Se ha añadido el usuario con exito!');
             return redirect()->route('usuarios');
         }
     }
 
     public function precargar_usuario($usuario){
-        if(Auth::user()->fk_cat_rol != 1){
+        if($this->validar_sesion()){
             return redirect('/');
         }
         $titulo = 'Editar usuario';
         $infoUsuario = $this->datos_sesion();
         $roles = $this->tipo_rol();
-        $consulta = $consulta = Usuario::select('id_usuario','fk_persona','usuario','nombre','apellido_paterno','apellido_materno','fk_cat_rol')->join('t_persona','t_usuario.fk_persona','t_persona.id_persona')->join('t_cat_rol','t_usuario.fk_cat_rol','t_cat_rol.id_cat_rol')->where('id_usuario',$usuario)->first();
+        $consulta = Usuario::select('id_usuario','fk_persona','usuario','nombre','apellido_paterno','apellido_materno','fk_cat_rol','estado')->join('t_persona','t_usuario.fk_persona','t_persona.id_persona')->join('t_cat_rol','t_usuario.fk_cat_rol','t_cat_rol.id_cat_rol')->where('id_usuario',$usuario)->first();
         return view('layouts/direccion/editUser', compact('titulo','infoUsuario','consulta','roles'));
     }
 
@@ -119,6 +130,7 @@ class DireccionController extends Controller
             'apellido_paterno' => 'required',
             'apellido_materno' => 'required',
             'rol' => 'required',
+            'estado' => 'required',
         ]); 
 
         function actualizar($persona,$user){
@@ -128,6 +140,7 @@ class DireccionController extends Controller
             $persona->save();            
             $user->usuario = request()->usuario;
             $user->fk_cat_rol = request()->rol;
+            $user->estado = request()->estado;
             $user->save();
         }
         
@@ -140,17 +153,17 @@ class DireccionController extends Controller
                 ]);
             }else{
                 actualizar($persona,$user);
-                return redirect()->route('usuarios');
             }
         }else{
             actualizar($persona,$user);
-            return redirect()->route('usuarios');
         }
+        Alert::success('Edicion finalizada', 'Actualizacion de datos con exito!');
+        return redirect()->route('usuarios');
     }
 
     public function editar_password(Usuario $usuario){
-        if(!Auth::user()){
-            return redirect('/login');
+        if($this->validar_sesion()){
+            return redirect('/');
         }
         $titulo = 'Actualizar contraseña usuario';
         $infoUsuario = $this->datos_sesion();
@@ -164,19 +177,17 @@ class DireccionController extends Controller
         request()->validate([
             'password_actual' => 'required',
             'password_nuevo' => 'required|min:8|max:15',
-            'password_confirmacion' => 'required|min:8|max:15',
+            'password_confirmacion' => 'required|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&*!])[A-Za-z\d@#$%^&*!]{8,}$/',
 
         ]); 
         if(request()->password_nuevo == request()->password_confirmacion){
-            if(Hash::check(request()->password_actual, $usuario->password)){
+            if(Hash::check(request()->password_actual, Auth::user()->password)){
                 $usuario->password = Hash::make(request()->password_nuevo);
                 $usuario->save();
-                //alert()->success('Actualizacion completada','Se ha cambiado la contraseña de manera correcta.');
                 return redirect()->route('usuarios');
-                //return redirect()->to(route('usuarios'))->with('Actualizacion de contraseña completada', 'Aceptar');
             }else{
                 throw ValidationException::withMessages([
-                    'password_actual' => 'Contraseña actual no valida!'
+                    'password_actual' => 'Contraseña de usuario no valida!'
                 ]); 
             }
         }else{
@@ -184,5 +195,84 @@ class DireccionController extends Controller
                 'password_confirmacion' => 'Las contraseñas no son identicas!'
             ]);    
         } 
+        Alert::success('Contraseña actualizada', 'Actualizacion de contraseña con exito!');
+        return redirect()->route('usuarios');
+    }
+
+    public function deshabilitar_usuario(Usuario $usuario){
+        $usuario->estado = $usuario->estado == 1 || $usuario->estado == 2 ? 0 : 2;
+        $usuario->save();
+        Alert::success('Proceso completado', 'Estado de la cuenta actualizado con exito!');
+        return redirect()->route('usuarios');        
+    }
+
+    public function lista_materias(){
+        if($this->validar_sesion()){
+            return redirect('/');
+        }
+        $titulo = 'Listado de materias';
+        $infoUsuario = $this->datos_sesion();
+        $consulta = Materias::select('id_materia','nombre_materia','t_carrera.nombre_carrera','horas','creditos','semestre','t_materia.estado')->join('t_carrera','t_materia.fk_carrera','t_carrera.id_carrera')->get();
+        return view('layouts/direccion/listaMaterias', compact('titulo','infoUsuario','consulta'));        
+    }
+
+    public function agregar_materia(){
+        if($this->validar_sesion()){
+            return redirect('/');
+        }
+        $titulo = 'Agregar materia';
+        $infoUsuario = $this->datos_sesion();
+        $carreras = $this->lista_carreras();
+        return view('layouts/direccion/crearMateria', compact('titulo','infoUsuario','carreras'));        
+    }
+
+    public function crear_materia(){
+        $materia = new Materias();
+        request()->validate([
+            'nombre_materia'=>'required',
+            'carrera'=>'required',
+            'horas'=>'required',
+            'creditos'=>'required|min:1|numeric',
+            'semestre'=>'required',
+        ]);
+        $materia->nombre_materia = request()->nombre_materia;
+        $materia->fk_carrera = request()->carrera;
+        $materia->horas = request()->horas;
+        $materia->creditos = request()->creditos;
+        $materia->semestre = request()->semestre; 
+        $materia->save();
+        Alert::success('Proceso completado', 'Materia añadida con exito!');
+        return redirect()->route('listado.materia');
+    }
+
+    public function precargar_materia($materia){
+        if($this->validar_sesion()){
+            return redirect('/');
+        }
+        $titulo = 'Editar materia';
+        $infoUsuario = $this->datos_sesion();
+        $carreras = $this->lista_carreras();
+        $consulta = Materias::where('id_materia',$materia)->first();
+        return view('layouts/direccion/editMateria', compact('titulo','infoUsuario','consulta','carreras'));        
+    }
+
+    public function actualizar_usuario(Materias $materia){
+        request()->validate([
+            'nombre_materia'=>'required',
+            'carrera'=>'required',
+            'horas'=>'required',
+            'creditos'=>'required|min:1|numeric',
+            'semestre'=>'required',
+            'estado'=>'required',
+        ]);
+        $materia->nombre_materia = request()->nombre_materia;
+        $materia->fk_carrera = request()->carrera;
+        $materia->horas = request()->horas;
+        $materia->creditos = request()->creditos;
+        $materia->semestre = request()->semestre; 
+        $materia->estado = request()->estado; 
+        $materia->save();
+        Alert::success('Proceso completado', 'Materia actualizada con exito!');
+        return redirect()->route('listado.materia');
     }
 }

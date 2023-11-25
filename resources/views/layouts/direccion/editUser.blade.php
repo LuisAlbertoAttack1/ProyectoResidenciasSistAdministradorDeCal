@@ -63,6 +63,16 @@
                 </select>
                 <label for="rol" class="form-label"><i class="fa-solid fa-book me-2 text-verde2"></i>Puesto de Escuela</label>
             </div>
+            @error('estado')
+            <p class="text-danger"><i class="fas fa-exclamation-circle me-1 text-warning"></i> {{$message}}</p>
+            @enderror
+            <div class="form-floating mb-3">
+                <select name="estado" id="estado" class="form-control form-control-sm">
+                    <option value="2" {{($consulta->estado != 0 ? "selected=selected" : "")}}>Habilitado</option>
+                    <option value="0" {{($consulta->estado == 0 ? "selected=selected" : "")}}>Dehabilitado</option>
+                </select>
+                <label for="estado" class="form-label"><i class="fa-solid fa-user-gear text-verde2 me-2"></i>Estado cuenta</label>
+            </div>
         </div>
         <div class="col-md-11 text-end">
             <a href="{{ route('usuarios') }}" class="btn btn-outline-danger mb-3"><i class="fa-solid fa-rotate-left me-2"></i>Regresar</a>

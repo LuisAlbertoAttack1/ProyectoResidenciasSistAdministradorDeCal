@@ -17,15 +17,20 @@ class SesionController extends Controller
         $credenciales = request()->validate([
             'usuario' => 'required',
             'password' => 'required',
-        ]);            
+        ]);
         
         $user = User::where('usuario', request()->usuario)->first();
         if($user){
             if(Hash::check(request()->password, $user->password)){
-                Auth::login($user);
-                request()->session()->regenerate();
-                User::where('usuario', request()->usuario)->update(array('estado'=>'1'));
-                return redirect('/');
+                if($user->estado != 0){
+                    Auth::login($user);
+                    request()->session()->regenerate();
+                    User::where('usuario', request()->usuario)->update(array('estado'=>'1'));
+                    return redirect('/');
+                }else{
+                    Alert::error('Cuenta Deshabilitada','Tu cuenta ha sido desactivada. Por favor contacta al administrador.');
+                    return redirect()->route('login');
+                }
             }else{
                 throw ValidationException::withMessages([
                     'usuario' => 'Usuario o Contraseña no validos!'
