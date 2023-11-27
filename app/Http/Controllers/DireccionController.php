@@ -89,7 +89,7 @@ class DireccionController extends Controller{
             'nombre' => 'required',
             'apellido_paterno' => 'required',
             'apellido_materno' => 'required',
-            'password' => 'required|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&*!])[A-Za-z\d@#$%^&*!]{8,}$/',
+            'password' => 'required|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&.+=!])(?!.*\s).{8,}$/',
             'rol' => 'required',
         ]); 
 
@@ -178,7 +178,7 @@ class DireccionController extends Controller{
         request()->validate([
             'password_actual' => 'required',
             'password_nuevo' => 'required|min:8|max:15',
-            'password_confirmacion' => 'required|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&*!])[A-Za-z\d@#$%^&*!]{8,}$/',
+            'password_confirmacion' => 'required|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&.+=!])(?!.*\s).{8,}$/',
 
         ]); 
         if(request()->password_nuevo == request()->password_confirmacion){
