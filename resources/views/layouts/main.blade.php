@@ -31,10 +31,10 @@
                     </a>
                 </div>
                 <div class="col-md-3">
-                    <a href="{{route('materia')}}" class="card shadow card-panel mb-3">
+                    <a href="{{route('horarios.lista')}}" class="card shadow card-panel mb-3">
                         <div class="card-body text-center mt-3 mb-2">
-                            <i class="fa-solid fa-file-contract fa-6x mb-1 mb-3"></i>
-                            <h6>Asignacion de materias</h6>
+                            <i class="fa-regular fa-clock fa-6x mb-1 mb-3"></i>
+                            <h6>Asignacion de Horarios</h6>
                         </div>
                     </a>
                 </div>

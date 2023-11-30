@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DireccionController;
+use App\Http\Controllers\HorariosController;
 use App\Http\Controllers\InicioController;
 use App\Http\Controllers\SesionController;
 use Illuminate\Support\Facades\Route;
@@ -30,6 +31,8 @@ Route::get('/editar{usuario}',[DireccionController::class, 'precargar_usuario'])
 Route::put('/edit/{persona}',[DireccionController::class, 'editar_usuario'])->name('editar.usuario');
 Route::get('/editPassword{usuario}',[DireccionController::class, 'editar_password'])->name('password.usuario');
 Route::put('/editPass/{usuario}',[DireccionController::class, 'edit_password'])->name('password.edit');
+
+Route::get('/horarios', [HorariosController::class, 'listado_horarios'])->name('horarios.lista');
 
 Route::delete('/deshabilitar/{usuario}',[DireccionController::class, 'deshabilitar_usuario'])->name('disabled.usuario');
 
