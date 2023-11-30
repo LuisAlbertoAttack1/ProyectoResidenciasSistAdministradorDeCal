@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-11-2023 a las 04:56:44
+-- Tiempo de generación: 30-11-2023 a las 06:06:14
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -124,6 +124,34 @@ CREATE TABLE `t_domicilio` (
   `Codigo_Postal` int(11) NOT NULL,
   `calle` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `t_horario`
+--
+
+CREATE TABLE `t_horario` (
+  `id_horario` int(11) NOT NULL,
+  `fk_materia` int(11) NOT NULL,
+  `lunes` varchar(15) NOT NULL,
+  `martes` varchar(15) NOT NULL,
+  `miercoles` varchar(15) NOT NULL,
+  `jueves` varchar(15) NOT NULL,
+  `viernes` varchar(15) NOT NULL,
+  `semestre` int(11) NOT NULL,
+  `fk_ciclo_escolar` int(11) NOT NULL,
+  `grupo` varchar(255) NOT NULL,
+  `fk_carrera` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `t_horario`
+--
+
+INSERT INTO `t_horario` (`id_horario`, `fk_materia`, `lunes`, `martes`, `miercoles`, `jueves`, `viernes`, `semestre`, `fk_ciclo_escolar`, `grupo`, `fk_carrera`) VALUES
+(1, 1, '07:00-08:40', '', '07:00-08:40', '', '07:00-08:40', 1, 9, 'prueba', 1),
+(2, 3, '07:00-08:40', '', '07:00-08:40', '', '07:00-08:40', 1, 9, 'prueba2', 3);
 
 -- --------------------------------------------------------
 
@@ -278,59 +306,60 @@ CREATE TABLE `t_persona` (
   `id_persona` int(11) NOT NULL,
   `nombre` varchar(255) NOT NULL,
   `apellido_paterno` varchar(255) NOT NULL,
-  `apellido_materno` varchar(255) NOT NULL
+  `apellido_materno` varchar(255) NOT NULL,
+  `sexo` char(1) NOT NULL DEFAULT 'I'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `t_persona`
 --
 
-INSERT INTO `t_persona` (`id_persona`, `nombre`, `apellido_paterno`, `apellido_materno`) VALUES
-(1, 'Maria De Lourdes', 'Martinez', 'Anzures'),
-(2, 'Lizeth', 'Labarrios', 'Medina'),
-(8, 'Diana', 'Perez', 'Nolasco'),
-(9, 'Marina', 'Ramirez', 'Vallejo'),
-(10, 'Maria Luisa', 'Cortes', 'Soto'),
-(11, 'Edith', 'Cayetano', 'Zamora'),
-(12, 'Maria Fernanda', 'Ledo', 'Jalpa'),
-(13, 'Michel', 'Martinez', 'Sandoval'),
-(14, 'Virginia', 'Urbina', 'Hernandez'),
-(15, 'Blanca Estela', 'Vega', 'Teran'),
-(16, 'Roman', 'Velazquez', 'Carmona'),
-(17, 'Roberto', 'Alonso', 'Quiroz'),
-(18, 'Gonzalo', 'Gonzalo', 'Arellano'),
-(19, 'Lucia', 'Avila', 'Martinez'),
-(20, 'Maribel', 'Arenas', 'Toledano'),
-(21, 'Emilio', 'Castañeda', 'Alcantara'),
-(22, 'Selene', 'Castillo', 'Camacho'),
-(23, 'Leticia', 'Castro', 'Camacho'),
-(24, 'Pascual', 'Cayetano', 'Vela'),
-(25, 'Marco Antonio', 'Cervantes', 'Aparicio'),
-(26, 'Martha', 'Galicia', 'Hernandez'),
-(27, 'Berenice', 'Galicia', 'Vazquez'),
-(28, 'Janet', 'García', 'Espejel'),
-(29, 'David', 'Garcia', 'Garcia'),
-(30, 'Norma', 'Garrido', 'Garrido'),
-(31, 'Veronica', 'Hernandez', 'Rivero'),
-(32, 'Julio Esteban', 'Islas', 'Reyes'),
-(33, 'Marco Antonio', 'Lopez', 'Rojas'),
-(34, 'Martha Leticia', 'Martinez', 'Leon'),
-(35, 'Nancy', 'Meza', 'Cruz'),
-(36, 'Sandra Ivonne', 'Neri', 'Talavera'),
-(37, 'Eva', 'Perez', 'Lara'),
-(38, 'David Mauro', 'Perez', 'Villegas'),
-(39, 'Maria Del Carmen', 'Ramirez', 'Mejia'),
-(40, 'Faustino', 'Rojas', 'Bautista'),
-(41, 'Maria Angelica', 'Rojas', 'Rodriguez'),
-(42, 'John', 'Salas', 'Garcia'),
-(43, 'Linda Adoracion', 'Saldraña', 'Xolalpa'),
-(44, 'Geminiano Arturo', 'Sanchez', 'De tagle'),
-(45, 'Ricardo', 'Silva', 'Garcia'),
-(46, 'Maria Lizeeth', 'Tapia', 'Nava'),
-(47, 'Enedina', 'Valeriano', 'López'),
-(48, 'Pedro', 'Vargas', 'Delgado'),
-(49, 'Maday', 'Velasco', 'Huitron'),
-(50, 'Marisa', 'Xala', 'Hernandez');
+INSERT INTO `t_persona` (`id_persona`, `nombre`, `apellido_paterno`, `apellido_materno`, `sexo`) VALUES
+(1, 'Maria De Lourdes', 'Martinez', 'Anzures', 'I'),
+(2, 'Lizeth', 'Labarrios', 'Medina', 'I'),
+(8, 'Diana', 'Perez', 'Nolasco', 'I'),
+(9, 'Marina', 'Ramirez', 'Vallejo', 'I'),
+(10, 'Maria Luisa', 'Cortes', 'Soto', 'I'),
+(11, 'Edith', 'Cayetano', 'Zamora', 'I'),
+(12, 'Maria Fernanda', 'Ledo', 'Jalpa', 'I'),
+(13, 'Michel', 'Martinez', 'Sandoval', 'I'),
+(14, 'Virginia', 'Urbina', 'Hernandez', 'I'),
+(15, 'Blanca Estela', 'Vega', 'Teran', 'I'),
+(16, 'Roman', 'Velazquez', 'Carmona', 'I'),
+(17, 'Roberto', 'Alonso', 'Quiroz', 'I'),
+(18, 'Gonzalo', 'Gonzalo', 'Arellano', 'I'),
+(19, 'Lucia', 'Avila', 'Martinez', 'I'),
+(20, 'Maribel', 'Arenas', 'Toledano', 'I'),
+(21, 'Emilio', 'Castañeda', 'Alcantara', 'I'),
+(22, 'Selene', 'Castillo', 'Camacho', 'I'),
+(23, 'Leticia', 'Castro', 'Camacho', 'I'),
+(24, 'Pascual', 'Cayetano', 'Vela', 'I'),
+(25, 'Marco Antonio', 'Cervantes', 'Aparicio', 'I'),
+(26, 'Martha', 'Galicia', 'Hernandez', 'I'),
+(27, 'Berenice', 'Galicia', 'Vazquez', 'I'),
+(28, 'Janet', 'García', 'Espejel', 'I'),
+(29, 'David', 'Garcia', 'Garcia', 'I'),
+(30, 'Norma', 'Garrido', 'Garrido', 'I'),
+(31, 'Veronica', 'Hernandez', 'Rivero', 'I'),
+(32, 'Julio Esteban', 'Islas', 'Reyes', 'I'),
+(33, 'Marco Antonio', 'Lopez', 'Rojas', 'I'),
+(34, 'Martha Leticia', 'Martinez', 'Leon', 'I'),
+(35, 'Nancy', 'Meza', 'Cruz', 'I'),
+(36, 'Sandra Ivonne', 'Neri', 'Talavera', 'I'),
+(37, 'Eva', 'Perez', 'Lara', 'I'),
+(38, 'David Mauro', 'Perez', 'Villegas', 'I'),
+(39, 'Maria Del Carmen', 'Ramirez', 'Mejia', 'I'),
+(40, 'Faustino', 'Rojas', 'Bautista', 'I'),
+(41, 'Maria Angelica', 'Rojas', 'Rodriguez', 'I'),
+(42, 'John', 'Salas', 'Garcia', 'I'),
+(43, 'Linda Adoracion', 'Saldraña', 'Xolalpa', 'I'),
+(44, 'Geminiano Arturo', 'Sanchez', 'De tagle', 'I'),
+(45, 'Ricardo', 'Silva', 'Garcia', 'I'),
+(46, 'Maria Lizeeth', 'Tapia', 'Nava', 'I'),
+(47, 'Enedina', 'Valeriano', 'López', 'I'),
+(48, 'Pedro', 'Vargas', 'Delgado', 'I'),
+(49, 'Maday', 'Velasco', 'Huitron', 'I'),
+(50, 'Marisa', 'Xala', 'Hernandez', 'I');
 
 -- --------------------------------------------------------
 
@@ -433,6 +462,12 @@ ALTER TABLE `t_domicilio`
   ADD PRIMARY KEY (`id_domicilio`);
 
 --
+-- Indices de la tabla `t_horario`
+--
+ALTER TABLE `t_horario`
+  ADD PRIMARY KEY (`id_horario`);
+
+--
 -- Indices de la tabla `t_materia`
 --
 ALTER TABLE `t_materia`
@@ -483,6 +518,12 @@ ALTER TABLE `t_ciclo_escolar`
 --
 ALTER TABLE `t_domicilio`
   MODIFY `id_domicilio` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `t_horario`
+--
+ALTER TABLE `t_horario`
+  MODIFY `id_horario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `t_materia`
