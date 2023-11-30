@@ -283,7 +283,7 @@ class DireccionController extends Controller{
         }
         $titulo = 'Listado de docentes';
         $infoUsuario = $this->datos_sesion();
-        $consulta = Docente::join('t_persona','t_docente.fk_persona','t_persona.id_persona')->get();
+        $consulta = Usuario::select('id_usuario','nombre','apellido_paterno','apellido_materno','estado')->join('t_persona','t_usuario.fk_persona','t_persona.id_persona')->where('fk_cat_rol','3')->get();
         return view('layouts/direccion/listaDocente', compact('titulo','infoUsuario','consulta'));  
     }
 }

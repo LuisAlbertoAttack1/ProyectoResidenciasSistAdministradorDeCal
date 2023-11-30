@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-11-2023 a las 07:59:01
+-- Tiempo de generación: 30-11-2023 a las 04:56:44
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -24,11 +24,26 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `t_carrera`
+-- Estructura de tabla para la tabla `t_alumno`
 --
 
 CREATE DATABASE sac;
 USE sac;
+
+CREATE TABLE `t_alumno` (
+  `id_alumno` int(11) NOT NULL,
+  `fk_persona` int(11) NOT NULL,
+  `fk_carrera` int(11) NOT NULL,
+  `semestre` int(11) NOT NULL DEFAULT 1,
+  `fecha_ingreso` date NOT NULL,
+  `estado` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `t_carrera`
+--
 
 CREATE TABLE `t_carrera` (
   `id_carrera` int(11) NOT NULL,
@@ -80,17 +95,20 @@ CREATE TABLE `t_ciclo_escolar` (
   `fin` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- --------------------------------------------------------
-
 --
--- Estructura de tabla para la tabla `t_docente`
+-- Volcado de datos para la tabla `t_ciclo_escolar`
 --
 
-CREATE TABLE `t_docente` (
-  `id_docente` int(11) NOT NULL,
-  `fk_persona` int(11) NOT NULL,
-  `estado` int(11) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `t_ciclo_escolar` (`id_ciclo_escolar`, `inicio`, `fin`) VALUES
+(1, 2015, 2016),
+(2, 2016, 2017),
+(3, 2017, 2018),
+(4, 2018, 2019),
+(5, 2019, 2020),
+(6, 2020, 2021),
+(7, 2021, 2022),
+(8, 2022, 2023),
+(9, 2023, 2024);
 
 -- --------------------------------------------------------
 
@@ -270,9 +288,49 @@ CREATE TABLE `t_persona` (
 INSERT INTO `t_persona` (`id_persona`, `nombre`, `apellido_paterno`, `apellido_materno`) VALUES
 (1, 'Maria De Lourdes', 'Martinez', 'Anzures'),
 (2, 'Lizeth', 'Labarrios', 'Medina'),
-(7, 'diego', 'bollas', 'paredes'),
 (8, 'Diana', 'Perez', 'Nolasco'),
-(9, 'Yakumo', 'Saito', 'Uchiha');
+(9, 'Marina', 'Ramirez', 'Vallejo'),
+(10, 'Maria Luisa', 'Cortes', 'Soto'),
+(11, 'Edith', 'Cayetano', 'Zamora'),
+(12, 'Maria Fernanda', 'Ledo', 'Jalpa'),
+(13, 'Michel', 'Martinez', 'Sandoval'),
+(14, 'Virginia', 'Urbina', 'Hernandez'),
+(15, 'Blanca Estela', 'Vega', 'Teran'),
+(16, 'Roman', 'Velazquez', 'Carmona'),
+(17, 'Roberto', 'Alonso', 'Quiroz'),
+(18, 'Gonzalo', 'Gonzalo', 'Arellano'),
+(19, 'Lucia', 'Avila', 'Martinez'),
+(20, 'Maribel', 'Arenas', 'Toledano'),
+(21, 'Emilio', 'Castañeda', 'Alcantara'),
+(22, 'Selene', 'Castillo', 'Camacho'),
+(23, 'Leticia', 'Castro', 'Camacho'),
+(24, 'Pascual', 'Cayetano', 'Vela'),
+(25, 'Marco Antonio', 'Cervantes', 'Aparicio'),
+(26, 'Martha', 'Galicia', 'Hernandez'),
+(27, 'Berenice', 'Galicia', 'Vazquez'),
+(28, 'Janet', 'García', 'Espejel'),
+(29, 'David', 'Garcia', 'Garcia'),
+(30, 'Norma', 'Garrido', 'Garrido'),
+(31, 'Veronica', 'Hernandez', 'Rivero'),
+(32, 'Julio Esteban', 'Islas', 'Reyes'),
+(33, 'Marco Antonio', 'Lopez', 'Rojas'),
+(34, 'Martha Leticia', 'Martinez', 'Leon'),
+(35, 'Nancy', 'Meza', 'Cruz'),
+(36, 'Sandra Ivonne', 'Neri', 'Talavera'),
+(37, 'Eva', 'Perez', 'Lara'),
+(38, 'David Mauro', 'Perez', 'Villegas'),
+(39, 'Maria Del Carmen', 'Ramirez', 'Mejia'),
+(40, 'Faustino', 'Rojas', 'Bautista'),
+(41, 'Maria Angelica', 'Rojas', 'Rodriguez'),
+(42, 'John', 'Salas', 'Garcia'),
+(43, 'Linda Adoracion', 'Saldraña', 'Xolalpa'),
+(44, 'Geminiano Arturo', 'Sanchez', 'De tagle'),
+(45, 'Ricardo', 'Silva', 'Garcia'),
+(46, 'Maria Lizeeth', 'Tapia', 'Nava'),
+(47, 'Enedina', 'Valeriano', 'López'),
+(48, 'Pedro', 'Vargas', 'Delgado'),
+(49, 'Maday', 'Velasco', 'Huitron'),
+(50, 'Marisa', 'Xala', 'Hernandez');
 
 -- --------------------------------------------------------
 
@@ -294,13 +352,61 @@ CREATE TABLE `t_usuario` (
 --
 
 INSERT INTO `t_usuario` (`id_usuario`, `usuario`, `password`, `fk_cat_rol`, `fk_persona`, `estado`) VALUES
-(1, 'Mtra.LourdesMtz', '$2y$10$HOnh9gDtYLeKM7nB/Zpi8eSBvIJyy7CJYNotccQhmmyyibYQZNUN2', 1, 1, 2),
+(1, 'Mtra.LourdesMtz', '$2y$10$HOnh9gDtYLeKM7nB/Zpi8eSBvIJyy7CJYNotccQhmmyyibYQZNUN2', 1, 1, 1),
 (2, 'Mtra.LizethLabarriosMedina', '$2y$10$HOnh9gDtYLeKM7nB/Zpi8eSBvIJyy7CJYNotccQhmmyyibYQZNUN2', 2, 2, 2),
-(5, 'Docente.DianaPerez', '$2y$10$4TPoUL0n3orz0Y3n6tSuu.toOaMhm7WT5KjZ6IHeKYIfYnuIvUqFC', 3, 8, 2);
+(5, 'Docente.DianaPN', '$2y$10$07jcKRFYD5UxQTJsNBfn7e5f9rkHqXW48lXAx4znc7hlk/xpWXZqy', 3, 8, 2),
+(6, 'Docente.MarianaRV', '$2y$10$Xxqk0jTdyH0pE/zdz8hlq.leqFd4hac0PgNHA9gWrL1S60S5Sbqli', 3, 9, 2),
+(7, 'Docente.MariaLuisaCS', '$2y$10$RfqJen4TZQAEvz3tFtgM3.Iv3lqj3X8LpoC301TceDj6aThYHQRx2', 3, 10, 2),
+(8, 'Docente.EdithCZ', '$2y$10$/LPUgK6ZRSfHkJXR13kHN.77lLPUpln6309DAN0uLgutQp7i69mYi', 3, 11, 2),
+(9, 'Docente.MariaFernandaLJ', '$2y$10$YyQrgwPqwz7KkUXnA6wI8uE1YxiMHge/PIiAsZNQ7OKNgFimvl3sy', 3, 12, 2),
+(10, 'Docente.MichelMS', '$2y$10$aQ9x0HsVET8TvysCepnN/emkuCZ1OGGB9y7fGHXtMinCas0FYZM82', 3, 13, 2),
+(11, 'Docente.VirginiaUH', '$2y$10$6Xp0AlVbCGnr/6WabW63Ieec4/VnEEgf9cu5La4tBQ7N5NQFDMxAK', 3, 14, 2),
+(12, 'Docente.BlancaEstelaVT', '$2y$10$GJFahY9zyGLMRSjRZvJohOjbI5K.dPkwdP2JhgP/4mX/HAPgVYCzm', 3, 15, 2),
+(13, 'Docente.RomanVC', '$2y$10$XNk9pVV4KsMnNve.QIPBe.ToLWfq9xiEWQxd6jEfArM895QzW.xja', 3, 16, 2),
+(14, 'Docente.Roberto', '$2y$10$gBKJ63cJy0G6Hh85XsRo8OAIx3WlGRSd1YMJfb1j/Q0VcpIn/iuKS', 3, 17, 2),
+(15, 'Docente.GonzaloGA', '$2y$10$SnLXGEHrlNX3Dgs8mWsUTunm3N0dUXW/jBWimyENWvCL96fWqTSz2', 3, 18, 2),
+(16, 'Docente.LuciaAM', '$2y$10$6CmgDXkzY522uuCRMysLGuNsyNRWPZuF7u.urgXSnqf1xoP7m9k0q', 3, 19, 2),
+(17, 'Docente.MaribelAT', '$2y$10$UmpjzuIJx.wHQAI5zVYGnORbsV6o7lAZUR14CHk8vJ67eCXIq4kJW', 3, 20, 2),
+(18, 'Docente.EmilioCA', '$2y$10$KKdQofvhQ90LUm9Ow/RxhOMe.ZvZZaJJoWT5tVHA/H8LIJlrctgki', 3, 21, 2),
+(19, 'Docente.SeleneCC', '$2y$10$iAMW/OlTn/8pmVW5ENTqL.pjw3za01xxL1q7aobC.OzMGomTISvLy', 3, 22, 2),
+(20, 'Docente.LeticiaCC', '$2y$10$xuzj9.PLF9SDCuLknSaUaeXLwTRIR/4rhJQkqRi6arKzlVxVkrm7m', 3, 23, 2),
+(21, 'Docente.PascualCV', '$2y$10$2k1p1UfAp7BZSpr4Tm60x.ntXQ67QnFb6OUeSwWXWtJ7fLJJmKwcC', 3, 24, 2),
+(22, 'Docente.MarcoAntonioCA', '$2y$10$LyinpToQfmvSexZysFlbouZQsMoAVPVh56V/.uWcoOmCrily5RydO', 3, 25, 2),
+(23, 'Docente.MarthaGH', '$2y$10$VVLLCK4sRMknjIiJvbJJ6.8/EnPlp.ifd.YqYMyRF4Y8vJijVifwS', 3, 26, 2),
+(24, 'Docente.BereniceGV', '$2y$10$sILJ.7cAt/bnipxFons1r.tPqXxPuaF3.j1EApQGEkl.VXMUgIntW', 3, 27, 2),
+(25, 'Docente.JanetGE', '$2y$10$ylQ.zph1SWZNVPhusHNkZOs46FUh7HmCL2ipAYJpZWiohx2gsOs/C', 3, 28, 2),
+(26, 'Docente.DavidGG', '$2y$10$jV3ChDZgUMBbXCmnIyZa1eONzaXr2k7OtWsn.ezbhG9DCYklZMDb6', 3, 29, 2),
+(27, 'Docente.NormaGG', '$2y$10$AXHRNFDGA4hNo0kcvNoz/eW8lJAgnJHUIr5DKM.SCpzYgqN8PRJ5i', 3, 30, 2),
+(28, 'Docente.VeronicaHR', '$2y$10$/Qc5yM/15JgXDD2K.Tz2Iu0.00malCxHTGSUVblThUm5lXh016s56', 3, 31, 2),
+(29, 'Docente.JulioEstebanIR', '$2y$10$sH5ingV9b/jcpgBrgwIlgeabqfuUEWJ.tX94tOQ7EFmhj/xVGQ/fG', 3, 32, 2),
+(30, 'Docente.MarcoAntonioLR', '$2y$10$b0ced.H40YOPiAILlEtQJ.Cvy9ERMhjw1vfv9OUny56iDg34dVAVm', 3, 33, 2),
+(31, 'Docente.MarthaLeticiaML', '$2y$10$j0WPgRgMztesDU.6ymJ1Au6iRAxX./k9IPw5PwHLdmpAiZ4jNFQOC', 3, 34, 2),
+(32, 'Docente.NancyMC', '$2y$10$fXHxpNkwl0tB77F.J6C.ZeN53hKG3tA083GMT/rTaTSE7gcIHrOom', 3, 35, 2),
+(33, 'Docente.SandraIvoneNT', '$2y$10$Mq01d0yVTkLn7v2rxMRFOeyHutPkdU0gMDDEUyNqrnEBc8lahleoO', 3, 36, 2),
+(34, 'Docente.EvaPL', '$2y$10$pT2ogJHcT8gTLt.ofpDLSOW8AWH8gi6zZnXnhG9PEgPa1dsFcPIZO', 3, 37, 2),
+(35, 'Docente.DavidMauro', '$2y$10$Uh5rgg9yShNX.KVjHwDO0uz67oxwv4IMj4EsD7b9P5pdXf/VPc7/e', 3, 38, 2),
+(36, 'Docente.MariaDelCarmenRM', '$2y$10$MbB72z0nrex/WmUHdOxRr.Bhqc8WqX.3Ox2JmmHHN5bNJWI7V0vcS', 3, 39, 2),
+(37, 'Docente.FaustinoRB', '$2y$10$XS.Oxwl1u.uWb2nibT8Ad.A5Nujvu0ljy9fQS3EmT89EtEIEAJ7Bq', 3, 40, 2),
+(38, 'Docente.MariaAngelicaRR', '$2y$10$x6VFBrlG1pR4yhI1e/y2v.Y5018Pv6NWt.Cm0MX2Qpp5o79MFkHDm', 3, 41, 2),
+(39, 'Docente.JohnSG', '$2y$10$sz0SgPkVNk.EtEQLlT0SmeqiDmJc7OIpDUaooVexZUSG.Sm3yOpV.', 3, 42, 2),
+(40, 'Docente.LindaAdoracionSX', '$2y$10$HF0VaY7G8LWbcmwW1lyFVu8npOuk4HZtKbIeYOlIBwmVQ/AwFPHQe', 3, 43, 2),
+(41, 'Docente.GeminianoArturoST', '$2y$10$0/VP2mEmReddccSve024SOyYhosSRR0JF12xumONRLjEtxMnGOUBy', 3, 44, 2),
+(42, 'Docente.RicardoSG', '$2y$10$AUFgAsybMcB8SUWo0fyeG.AseL8.oYUjf7yQWPkI81BtUX.VdNkz.', 3, 45, 2),
+(43, 'Docente.MariaLizeethTN', '$2y$10$EuTT1i57jqgDhh1HfxTb5.9i7O8LDKwJHUlpLj8zJjX5gnAm1WjKK', 3, 46, 2),
+(44, 'Docente.EnedinaVL', '$2y$10$H0i1msH/kbQLmdrOldO/s.GK8F/WRlOIiWam8EWBZVpaR13FglTsO', 3, 47, 2),
+(45, 'Docente.PedroVD', '$2y$10$HGQIIn1io/0o0vsU49Ao2uiHG8ZRHeiVQNIEuoecP/Ho6zeJ1pk2a', 3, 48, 2),
+(46, 'Docente.MadayVH', '$2y$10$xYqwPkhkl3n0.QDW/0gpnOs/t2I6vOeD0Du85uyZf1BfTnKh6pnIm', 3, 49, 2),
+(47, 'Docente.MarisaXH', '$2y$10$jKBGxaOz7HWqZ6q1b6nsZ.IQ89n3uy/gjgIjDeQA9R/82f2Srnqjm', 3, 50, 2);
 
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `t_alumno`
+--
+ALTER TABLE `t_alumno`
+  ADD PRIMARY KEY (`id_alumno`);
 
 --
 -- Indices de la tabla `t_carrera`
@@ -319,12 +425,6 @@ ALTER TABLE `t_cat_rol`
 --
 ALTER TABLE `t_ciclo_escolar`
   ADD PRIMARY KEY (`id_ciclo_escolar`);
-
---
--- Indices de la tabla `t_docente`
---
-ALTER TABLE `t_docente`
-  ADD PRIMARY KEY (`id_docente`);
 
 --
 -- Indices de la tabla `t_domicilio`
@@ -355,6 +455,12 @@ ALTER TABLE `t_usuario`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `t_alumno`
+--
+ALTER TABLE `t_alumno`
+  MODIFY `id_alumno` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `t_carrera`
 --
 ALTER TABLE `t_carrera`
@@ -370,13 +476,7 @@ ALTER TABLE `t_cat_rol`
 -- AUTO_INCREMENT de la tabla `t_ciclo_escolar`
 --
 ALTER TABLE `t_ciclo_escolar`
-  MODIFY `id_ciclo_escolar` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `t_docente`
---
-ALTER TABLE `t_docente`
-  MODIFY `id_docente` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_ciclo_escolar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `t_domicilio`
@@ -394,13 +494,13 @@ ALTER TABLE `t_materia`
 -- AUTO_INCREMENT de la tabla `t_persona`
 --
 ALTER TABLE `t_persona`
-  MODIFY `id_persona` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_persona` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT de la tabla `t_usuario`
 --
 ALTER TABLE `t_usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

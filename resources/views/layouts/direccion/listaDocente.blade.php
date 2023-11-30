@@ -8,7 +8,6 @@
         <div class="col-md-12">
             <div class="text-end">
                 <a href="{{route('panel')}}" class="btn btn-outline-danger mb-3"><i class="fa-solid fa-rotate-left me-2"></i>Regresar</a>
-                <a href="{{route('agregar.materia')}}" class="btn btn-outline-success mb-3"><i class="fa-solid fa-user-tie me-2"></i>Agregar docente</a>
                 <hr class="text-verde mb-4">
             </div>
             <div class="table-responsive">
@@ -17,19 +16,16 @@
                         <tr class="text-center">
                             <th class="text-center" scope="col">Nombre(s)</th>
                             <th class="text-center" scope="col">Ap. Paterno</th>
-                            <th class="text-center" scope="col">Ap. Materno</th>
-                            <th class="text-center" scope="col">Editar</th>                            
+                            <th class="text-center" scope="col">Ap. Materno</th>                       
                             <th class="text-center" scope="col">Estado</th>
                         </tr>
                     <thead>   
                     <tbody> 
                         @foreach($consulta as $persona)
                             <tr>
-                                <td class="text-start">{{$persona['nombre']}}</td>
-                                <td class="text-start align-middle">{{$persona['apellido_paterno']}}</td>
+                                <td class="">{{$persona['nombre']}}</td>
+                                <td class=" align-middle">{{$persona['apellido_paterno']}}</td>
                                 <td class="align-middle">{{$persona['apellido_materno']}}</td>
-                                <td class="align-middle">{{$persona['creditos']}}</td>
-                                <td class="align-middle"><a href="{{route('precarga.materia',$materia['id_materia'])}}" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i></a></td>
                                 @if($persona['estado'] != 0)
                                 <td class="align-middle"><span class="text-success" title="Habilitada"><i class="fa-regular fa-circle-check"></i></span></td>
                                 @else
