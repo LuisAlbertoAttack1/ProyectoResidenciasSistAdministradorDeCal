@@ -19,9 +19,9 @@ Route::get('/asignacionMateria', [DireccionController::class, 'asignacion_materi
 Route::get('/listado', [DireccionController::class, 'Aprobados_y_Reprobados'])->name('listado');
 Route::get('/lista_materias', [DireccionController::class, 'lista_materias'])->name('listado.materia');
 Route::get('/addUser', [DireccionController::class, 'agregar_usuario'])->name('agregar');
-Route::get('/addMateria', [DireccionController::class, 'agregar_materia'])->name('agregar.materia');
 Route::get('/listado_docentes', [DireccionController::class, 'listado_docente'])->name('lista.docente');
 
+Route::get('/addMateria',[DireccionController::class, 'agregar_materia'])->name('materia.agregar');
 Route::post('/crearMateria', [DireccionController::class, 'crear_materia'])->name('crear.materia');
 Route::get('/cargarMateria{materia}',[DireccionController::class, 'precargar_materia'])->name('precarga.materia');
 Route::put('/actualizar/{materia}',[DireccionController::class, 'actualizar_usuario'])->name('actualizar.materia');
@@ -33,6 +33,7 @@ Route::get('/editPassword{usuario}',[DireccionController::class, 'editar_passwor
 Route::put('/editPass/{usuario}',[DireccionController::class, 'edit_password'])->name('password.edit');
 
 Route::get('/horarios', [HorariosController::class, 'listado_horarios'])->name('horarios.lista');
+Route::get('/addMateria', [HorariosController::class, 'agregar_horario'])->name('horarios.agregar');
 
 Route::delete('/deshabilitar/{usuario}',[DireccionController::class, 'deshabilitar_usuario'])->name('disabled.usuario');
 

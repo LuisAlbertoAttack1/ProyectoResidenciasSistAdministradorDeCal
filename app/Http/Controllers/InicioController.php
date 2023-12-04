@@ -31,14 +31,17 @@ class InicioController extends Controller
         if(!Auth::user()){
             return redirect('/login');
         }
-        if(Auth::user()->fk_cat_rol != 1){
-            return redirect('/');
-        }
         $titulo = 'Panel de control';
         $infoUsuario = Persona::where('id_persona',Auth::user()->fk_persona)->first();
         $rol = Rol::where('id_cat_rol',Auth::user()->fk_cat_rol)->first();
         $infoUsuario['puesto'] = $rol->rol;
-        return view('layouts/main', compact('titulo','infoUsuario'));
+        if(Auth::user()->fk_cat_rol == 1){
+            return view('layouts/dashboard1', compact('titulo','infoUsuario')); 
+        }
+        if(Auth::user()->fk_cat_rol == 2){
+            return view('layouts/dashboard2', compact('titulo','infoUsuario')); 
+        }
+        return redirect('/');
     }
     
 }
