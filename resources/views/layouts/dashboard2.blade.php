@@ -3,7 +3,7 @@
 <div class="container mt-1">
     <div class="row justify-content-center mt-5">
         <div class="col-12 mb-3">
-            <h1 class="display-6"><b><i class="fa-solid fa-school-flag me-2 text-verde2"></i>Funciones Subdireccion</b></h1>
+            <h1 class="display-6"><b><i class="fa-solid fa-school me-2 text-verde2"></i>Funciones Servicios Escolares</b></h1>
             <div class="row mt-4">
                 <hr class="text-success mb-5">
                 <div class="col-md-3">
