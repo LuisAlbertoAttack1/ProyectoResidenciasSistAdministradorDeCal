@@ -12,6 +12,7 @@ use App\Models\Rol;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class HorariosController extends Controller{
     private function lista_carreras(){
@@ -19,7 +20,7 @@ class HorariosController extends Controller{
         return $consulta;
     }
     private function validar_sesion(){
-        return !Auth::user() || Auth::user()->fk_cat_rol != 1;
+        return !Auth::user() || Auth::user()->fk_cat_rol == 3;
     }
     private function lista_docentes(){
        $consulta = Usuario::select('id_usuario','nombre','apellido_paterno','apellido_materno')->join('t_persona','t_usuario.fk_persona','t_persona.id_persona')->where('fk_cat_rol','3')->orderBy('t_persona.apellido_paterno','asc')->get();
@@ -57,5 +58,50 @@ class HorariosController extends Controller{
         $docentes = $this->lista_docentes();
         $materias = $this->lista_materias();
         return view('layouts/direccion/crearHorario', compact('titulo','infoUsuario','carreras','docentes','materias'));
+    }
+
+    public function crear_horario(){
+        $horario = new Horarios();
+        request()->validate([
+            'grupo'=>'required',
+            'carrera'=>'required',
+            'semestre'=>'required',
+            'materia'=>'required',
+            'docente'=>'required'
+        ]);
+        $horario->fk_materia = request()->materia;
+        $horario->lunes = request()->hora_inicio1.'-'.request()->hora_fin1;
+        $horario->martes = request()->hora_inicio2.'-'.request()->hora_fin2;
+        $horario->miercoles = request()->hora_inicio3.'-'.request()->hora_fin3;
+        $horario->jueves = request()->hora_inicio4.'-'.request()->hora_fin4;
+        $horario->viernes = request()->hora_inicio5.'-'.request()->hora_fin5;
+        $horario->semestre = request()->semestre; 
+        $horario->fk_ciclo_escolar = 9;
+        $horario->grupo = request()->grupo;
+        $horario->fk_carrera = request()->carrera;
+        $horario->fk_usuario = request()->docente;
+        $horario->save();
+        Alert::success('Proceso completado', 'Materia añadida con exito!');
+        return redirect()->route('horarios.agregar');
+    }
+
+    public function eliminar_horario(Horarios $horario){
+        $horarios =  new Horarios();
+        $horarios->where('id_horario',$horario->id_horario)->delete();
+        Alert::success('Proceso completado', 'Horario eliminado con exito!');
+        return redirect()->route('horarios.lista');
+    }
+
+    public function precargar_horario(Horarios $horario){
+        if($this->validar_sesion()){
+            return redirect('/');
+        }
+        $titulo = 'Editar horario';
+        $info_hr = $horario;
+        $infoUsuario = $this->datos_sesion();
+        $carreras = $this->lista_carreras();
+        $docentes = $this->lista_docentes();
+        $materias = $this->lista_materias();
+        return view('layouts/direccion/editarHorario', compact('titulo','infoUsuario','carreras','docentes','materias','info_hr'));                
     }
 }

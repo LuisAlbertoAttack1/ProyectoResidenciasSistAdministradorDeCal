@@ -25,7 +25,7 @@
                             <th class="text-center" scope="col">Miercoles</th>
                             <th class="text-center" scope="col">Jueves</th>
                             <th class="text-center" scope="col">Viernes</th>
-                            <th class="text-center" scope="col">Editar</th>
+                            <!-- <th class="text-center" scope="col">Editar</th> -->
                             <th class="text-center" scope="col">Eliminar</th>
                         </tr>
                     <thead>   
@@ -42,8 +42,8 @@
                                 <td class="align-middle text-sm">{{$horario['miercoles']}}</td>
                                 <td class="align-middle text-sm">{{$horario['jueves']}}</td>
                                 <td class="align-middle text-sm">{{$horario['viernes']}}</td>
-                                <td class="align-middle"><a href="{{$horario['id_horario']}}" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i></a></td>
-                                <td class="align-middle"><a href="{{$horario['id_horario']}}" class="btn btn-outline-danger btn-sm"><i class="fa-solid fa-trash-can"></i></a></td>
+                                <!-- <td class="align-middle"><a href="{{route('horarios.prev',$horario['id_horario'])}}" class="btn btn-outline-primary btn-sm"><i class="fa-solid fa-pen-to-square"></i></a></td> -->
+                                <td class="align-middle"><a href="{{route('horarios.del',$horario['id_horario'])}}" class="btn btn-outline-danger btn-sm"><i class="fa-solid fa-trash-can"></i></a></td>
                             </tr>
                         @endforeach                       
                     </tbody>              

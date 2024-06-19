@@ -38,19 +38,19 @@
                         </div>
                     </a>
                 </div>
-                <div class="col-md-3">
+                <!-- <div class="col-md-3">
                     <a href="{{route('listado')}}" class="card shadow card-panel mb-3">
                         <div class="card-body text-center mt-3 mb-2">
                             <i class="fa-solid fa-list-check fa-6x mb-3"></i>
                             <h6>Calificaciones</h6>
                         </div>
                     </a>
-                </div>
+                </div> -->
                 <div class="col-md-3">
                     <a href="{{route('f1')}}" class="card shadow card-panel mb-3">
                         <div class="card-body text-center mt-3 mb-2">
                             <i class="fa-solid fa-file-arrow-up fa-6x mb-1 mb-3"></i>
-                            <h6>Carga De Archivos F1</h6>
+                            <h6>Descarga De Archivos F1</h6>
                         </div>
                     </a>
                 </div>

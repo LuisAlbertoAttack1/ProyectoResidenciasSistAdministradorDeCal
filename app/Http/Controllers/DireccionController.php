@@ -17,7 +17,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 class DireccionController extends Controller{
     //funcion para validar si existe una sesion y si existe corresponda al rol adecuado
     private function validar_sesion(){
-        return !Auth::user() || Auth::user()->fk_cat_rol != 1;
+        return !Auth::user() || Auth::user()->fk_cat_rol == 3;
     }
     //funcion para obtener los datos del usuario con sesion activa 
     private function datos_sesion(){
@@ -71,11 +71,11 @@ class DireccionController extends Controller{
         $infoUsuario = $this->datos_sesion();
         return view('layouts/direccion/EditarAsignacionMat', compact('titulo','infoUsuario'));
     }
-    public function Aprobados_y_Reprobados(){
+    public function asignacion_alumnos(){
         if($this->validar_sesion()){
             return redirect('/');
         }
-        $titulo = 'Inicio';
+        $titulo = 'Asignacion';
         $infoUsuario = $this->datos_sesion();
         return view('layouts/direccion/Aprobadosyreprobados', compact('titulo','infoUsuario'));
     }
@@ -178,7 +178,7 @@ class DireccionController extends Controller{
         request()->validate([
             'password_actual' => 'required',
             'password_nuevo' => 'required|min:8|max:15',
-            'password_confirmacion' => 'required|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$%^&.+=!])(?!.*\s).{8,}$/',
+            'password_confirmacion' => 'required|min:8|max:15',
 
         ]); 
         if(request()->password_nuevo == request()->password_confirmacion){

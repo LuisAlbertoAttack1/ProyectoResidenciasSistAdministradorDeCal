@@ -8,7 +8,7 @@
         <div class="col-md-12">
             <div class="text-end">
                 <a href="{{route('panel')}}" class="btn btn-outline-danger mb-3"><i class="fa-solid fa-rotate-left me-2"></i>Regresar</a>
-                <a href="{{route('materia.agregar')}}" class="btn btn-outline-success mb-3"><i class="fa-solid fa-book me-2"></i>Agregar materia</a>
+                <a href="{{route('add.materia')}}" class="btn btn-outline-success mb-3"><i class="fa-solid fa-book me-2"></i>Agregar materia</a>
                 <hr class="text-verde mb-4">
             </div>
             <div class="table-responsive">

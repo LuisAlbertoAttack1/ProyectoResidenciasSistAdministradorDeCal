@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-11-2023 a las 06:06:14
--- Versión del servidor: 10.4.28-MariaDB
--- Versión de PHP: 8.2.4
+-- Tiempo de generación: 19-06-2024 a las 13:45:33
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -118,12 +118,48 @@ INSERT INTO `t_ciclo_escolar` (`id_ciclo_escolar`, `inicio`, `fin`) VALUES
 
 CREATE TABLE `t_domicilio` (
   `id_domicilio` int(11) NOT NULL,
-  `numero` int(11) NOT NULL,
+  `domicilio` varchar(450) NOT NULL,
   `municipio` varchar(250) NOT NULL,
   `poblado` varchar(250) NOT NULL,
-  `Codigo_Postal` int(11) NOT NULL,
-  `calle` varchar(250) NOT NULL
+  `fk_usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `t_domicilio`
+--
+
+INSERT INTO `t_domicilio` (`id_domicilio`, `domicilio`, `municipio`, `poblado`, `fk_usuario`) VALUES
+(1, 'calle #15', 'nnknk', 'nonn', 24);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `t_formato_uno`
+--
+
+CREATE TABLE `t_formato_uno` (
+  `id_formato_uno` int(11) NOT NULL,
+  `fk_horario` int(11) NOT NULL,
+  `falta1` int(11) NOT NULL,
+  `falta2` int(11) NOT NULL,
+  `falta3` int(11) NOT NULL,
+  `falta_total` int(11) NOT NULL,
+  `cal1` double NOT NULL,
+  `cal2` double NOT NULL,
+  `cal3` double NOT NULL,
+  `cal_sum` double NOT NULL,
+  `cal_final` double NOT NULL,
+  `nom_alumno` varchar(355) NOT NULL,
+  `sexo` varchar(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `t_formato_uno`
+--
+
+INSERT INTO `t_formato_uno` (`id_formato_uno`, `fk_horario`, `falta1`, `falta2`, `falta3`, `falta_total`, `cal1`, `cal2`, `cal3`, `cal_sum`, `cal_final`, `nom_alumno`, `sexo`) VALUES
+(1, 3, 7, 7, 7, 7, 10, 10, 10, 30, 10, 'test', 'H'),
+(2, 3, 9, 9, 9, 9, 9, 9, 9, 27, 9, 'test2', 'M');
 
 -- --------------------------------------------------------
 
@@ -142,16 +178,16 @@ CREATE TABLE `t_horario` (
   `semestre` int(11) NOT NULL,
   `fk_ciclo_escolar` int(11) NOT NULL,
   `grupo` varchar(255) NOT NULL,
-  `fk_carrera` int(11) NOT NULL
+  `fk_carrera` int(11) NOT NULL,
+  `fk_usuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `t_horario`
 --
 
-INSERT INTO `t_horario` (`id_horario`, `fk_materia`, `lunes`, `martes`, `miercoles`, `jueves`, `viernes`, `semestre`, `fk_ciclo_escolar`, `grupo`, `fk_carrera`) VALUES
-(1, 1, '07:00-08:40', '', '07:00-08:40', '', '07:00-08:40', 1, 9, 'prueba', 1),
-(2, 3, '07:00-08:40', '', '07:00-08:40', '', '07:00-08:40', 1, 9, 'prueba2', 3);
+INSERT INTO `t_horario` (`id_horario`, `fk_materia`, `lunes`, `martes`, `miercoles`, `jueves`, `viernes`, `semestre`, `fk_ciclo_escolar`, `grupo`, `fk_carrera`, `fk_usuario`) VALUES
+(3, 18, '-', '09:30-10:20', '-', '10:20-11:10', '-', 2, 9, 'test', 2, 24);
 
 -- --------------------------------------------------------
 
@@ -381,7 +417,7 @@ CREATE TABLE `t_usuario` (
 --
 
 INSERT INTO `t_usuario` (`id_usuario`, `usuario`, `password`, `fk_cat_rol`, `fk_persona`, `estado`) VALUES
-(1, 'Mtra.LourdesMtz', '$2y$10$HOnh9gDtYLeKM7nB/Zpi8eSBvIJyy7CJYNotccQhmmyyibYQZNUN2', 1, 1, 1),
+(1, 'Mtra.LourdesMtz', '$2y$10$HOnh9gDtYLeKM7nB/Zpi8eSBvIJyy7CJYNotccQhmmyyibYQZNUN2', 1, 1, 2),
 (2, 'Mtra.LizethLabarriosMedina', '$2y$10$HOnh9gDtYLeKM7nB/Zpi8eSBvIJyy7CJYNotccQhmmyyibYQZNUN2', 2, 2, 2),
 (5, 'Docente.DianaPN', '$2y$10$07jcKRFYD5UxQTJsNBfn7e5f9rkHqXW48lXAx4znc7hlk/xpWXZqy', 3, 8, 2),
 (6, 'Docente.MarianaRV', '$2y$10$Xxqk0jTdyH0pE/zdz8hlq.leqFd4hac0PgNHA9gWrL1S60S5Sbqli', 3, 9, 2),
@@ -402,7 +438,7 @@ INSERT INTO `t_usuario` (`id_usuario`, `usuario`, `password`, `fk_cat_rol`, `fk_
 (21, 'Docente.PascualCV', '$2y$10$2k1p1UfAp7BZSpr4Tm60x.ntXQ67QnFb6OUeSwWXWtJ7fLJJmKwcC', 3, 24, 2),
 (22, 'Docente.MarcoAntonioCA', '$2y$10$LyinpToQfmvSexZysFlbouZQsMoAVPVh56V/.uWcoOmCrily5RydO', 3, 25, 2),
 (23, 'Docente.MarthaGH', '$2y$10$VVLLCK4sRMknjIiJvbJJ6.8/EnPlp.ifd.YqYMyRF4Y8vJijVifwS', 3, 26, 2),
-(24, 'Docente.BereniceGV', '$2y$10$sILJ.7cAt/bnipxFons1r.tPqXxPuaF3.j1EApQGEkl.VXMUgIntW', 3, 27, 2),
+(24, 'Docente.BereniceGV', '$2y$10$rEzuJIvOWtR3aFtcjeO3.uXr3dh5NAJ71wNBG4YtlGY1oozmCo9j.', 3, 27, 2),
 (25, 'Docente.JanetGE', '$2y$10$ylQ.zph1SWZNVPhusHNkZOs46FUh7HmCL2ipAYJpZWiohx2gsOs/C', 3, 28, 2),
 (26, 'Docente.DavidGG', '$2y$10$jV3ChDZgUMBbXCmnIyZa1eONzaXr2k7OtWsn.ezbhG9DCYklZMDb6', 3, 29, 2),
 (27, 'Docente.NormaGG', '$2y$10$AXHRNFDGA4hNo0kcvNoz/eW8lJAgnJHUIr5DKM.SCpzYgqN8PRJ5i', 3, 30, 2),
@@ -462,6 +498,12 @@ ALTER TABLE `t_domicilio`
   ADD PRIMARY KEY (`id_domicilio`);
 
 --
+-- Indices de la tabla `t_formato_uno`
+--
+ALTER TABLE `t_formato_uno`
+  ADD PRIMARY KEY (`id_formato_uno`);
+
+--
 -- Indices de la tabla `t_horario`
 --
 ALTER TABLE `t_horario`
@@ -517,13 +559,19 @@ ALTER TABLE `t_ciclo_escolar`
 -- AUTO_INCREMENT de la tabla `t_domicilio`
 --
 ALTER TABLE `t_domicilio`
-  MODIFY `id_domicilio` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_domicilio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `t_formato_uno`
+--
+ALTER TABLE `t_formato_uno`
+  MODIFY `id_formato_uno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `t_horario`
 --
 ALTER TABLE `t_horario`
-  MODIFY `id_horario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_horario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `t_materia`

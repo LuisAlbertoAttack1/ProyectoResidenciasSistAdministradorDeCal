@@ -4,7 +4,7 @@
     <div class="row justify-content-around ">
         <h1 class="display-6 mb-4"><b><i class="fa-regular fa-clock text-verde2 me-2"></i>Añadir horario</b></h1>
         <hr class="text-verde">
-        <form id="frm_crear_horario" method="post" action="{{route('crear.materia')}}" class="row justify-content-around">
+        <form id="frm_crear_horario" method="post" action="{{route('horario.add')}}" class="row justify-content-around">
             @csrf
             <div class="col-12">
                 <div class="row justify-content-center">
@@ -12,7 +12,7 @@
                         <h3>Datos Materia</h3>
                     </div>
                     <div class="col-md-4">
-                        @error('semestre')
+                        @error('grupo')
                         <p class="text-danger"><i class="fas fa-exclamation-circle me-1 text-warning"></i> {{$message}}</p>
                         @enderror 
                         <div class="form-floating mb-3">
@@ -70,10 +70,10 @@
                         <p class="text-danger"><i class="fas fa-exclamation-circle me-1 text-warning"></i> {{$message}}</p>
                         @enderror 
                         <div class="form-floating mb-3">
-                            <select name="carrera" id="docente" class="form-control" value="{{old('docente')}}">
+                            <select name="docente" id="docente" class="form-control" value="{{old('docente')}}">
                                 <option value="">Selecionar docente</option>
                                 @foreach($docentes as $docente)
-                                <option value="{{$carrera['id_usuario']}}">{{$docente['apellido_paterno']." ".$docente['apellido_materno']." ".$docente['nombre']}}</option>
+                                <option value="{{$docente['id_usuario']}}">{{$docente['apellido_paterno']." ".$docente['apellido_materno']." ".$docente['nombre']}}</option>
                                 @endforeach
                             </select>
                             <label for="docente" class="form-label"><i class="fa-solid fa-scale-unbalanced-flip text-verde2"></i> Docente</label>
@@ -167,8 +167,18 @@
 <script>
     const horarios = ["07:00","07:50","08:40","09:30","10:20","11:10","12:00","12:50","13:40","14:30"];
 
+    const validar_horarios = () => {
+        let horario_asignado = 0;
+        for(let i = 1; i < 6; i++){
+            if($('#hora_inicio'+i).val() != ""){
+                horario_asignado++;
+            }
+        }
+        return horario_asignado > 0;
+    }
+
     const actualizar_hora_final = (inicio,fin) => {
-        let opciones = '<option value="">--:--</option>';
+        let opciones = '';
         let validacion = false;
         for(let i = 0; i < horarios.length; i++){
             if(horarios[i] == inicio){
@@ -199,7 +209,10 @@
     });
     $(document).ready(() => {
         $('#frm_crear_horario').on('submit', (e) => {
-            e.preventDefault();
+            if(!validar_horarios()){
+                e.preventDefault();
+                alert("Deebes seleccionar al menos una hora");
+            }
         });
     });
 </script>
